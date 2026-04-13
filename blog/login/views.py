@@ -1,6 +1,12 @@
 from django.shortcuts import render, redirect
-from django.shortcuts import render
+from django.shortcuts import User
 from .forms import UserForm
+
+
+def users(request):
+    #получим всех пользователей из базы
+    users = User.objects.all()
+    return render(request, 'users.html', {'users': users, 'page': 'users'})
 
 # Create your views here.
 def add_user(request):
@@ -15,3 +21,5 @@ def add_user(request):
     else:
         form = UserForm()
         return render(request, "add_user.html", {'form': form})
+    
+    
